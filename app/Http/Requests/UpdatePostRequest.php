@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class UpdatePostRequest extends FormRequest
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function authorize(): bool
     {
         return true;
@@ -21,6 +22,8 @@ class UpdatePostRequest extends FormRequest
             'category_id' => ['required', 'exists:categories,id'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
 =======
+=======
+>>>>>>> d0217c39a98ab41754f3ac277f0b39cb7dc98f7e
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -38,6 +41,9 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             //
+<<<<<<< HEAD
+>>>>>>> d0217c39a98ab41754f3ac277f0b39cb7dc98f7e
+=======
 >>>>>>> d0217c39a98ab41754f3ac277f0b39cb7dc98f7e
         ];
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+<<<<<<< HEAD
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Post extends Model
@@ -29,4 +30,11 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+=======
+
+class Post extends Model
+{
+    /** @use HasFactory<\Database\Factories\PostFactory> */
+    use HasFactory;
+>>>>>>> d0217c39a98ab41754f3ac277f0b39cb7dc98f7e
 }
