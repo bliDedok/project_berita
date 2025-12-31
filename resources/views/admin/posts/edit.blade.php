@@ -41,14 +41,14 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="category_id" class="form-label">Kategori</label>
-                    <select name="category_id" id="category_id" class="form-select @error('category_id') is-invalid @enderror" required>
+                    <label for="kategori_id" class="form-label">Kategori</label>
+                    <select name="kategori_id" id="kategori_id" class="form-select @error('kategori_id') is-invalid @enderror" required>
                         <option value="" disabled>Pilih kategori</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" @selected(old('category_id', $post->category_id) == $category->id)>{{ $category->name }}</option>
+                        @foreach ($kategoris as $kategori)
+                            <option value="{{ $kategori->id }}" @selected(old('kategori_id', $post->kategori_id) == $kategori->id)>{{ $kategori->name }}</option>
                         @endforeach
                     </select>
-                    @error('category_id')
+                    @error('kategori_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

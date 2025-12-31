@@ -24,9 +24,8 @@ class PostController extends Controller
 
     public function create(): View
     {
-        $categories = Kategori::orderBy('nama')->get();
-
-        return view('admin.posts.create', compact('categories'));
+        $kategoris = Kategori::all();
+        return view('admin.posts.create', compact('kategoris'));
     }
 
     public function store(StorePostRequest $request): RedirectResponse
@@ -56,9 +55,8 @@ class PostController extends Controller
 
     public function edit(Post $post): View
     {
-        $categories = Kategori::orderBy('nama')->get();
-
-        return view('admin.posts.edit', compact('post', 'categories'));
+        $kategoris = Kategori::all();
+        return view('admin.posts.create', compact('kategoris'));
     }
 
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
