@@ -42,8 +42,8 @@
                         @forelse ($posts as $post)
                             <tr>
                                 <td>{{ $loop->iteration + ($posts->currentPage() - 1) * $posts->perPage() }}</td>
-                                <td>{{ $post->title }}</td>
-                                <td>{{ $post->category->name ?? '-' }}</td>
+                                <td>{{ $post->judul }}</td>
+                                <td>{{ $post->kategori->nama ?? '-' }}</td>
                                 <td>{{ $post->user->name ?? '-' }}</td>
                                 <td>{{ optional($post->created_at)->format('d M Y') }}</td>
                                 <td class="text-end">

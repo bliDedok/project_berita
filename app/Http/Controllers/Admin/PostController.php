@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
-use App\Models\Category;
+use App\Models\Kategori;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -17,14 +17,14 @@ class PostController extends Controller
 {
     public function index(): View
     {
-        $posts = Post::with(['category', 'user'])->latest()->paginate(10);
+        $posts = Post::with(['kategori', 'user'])->latest()->paginate(10);
 
         return view('admin.posts.index', compact('posts'));
     }
 
     public function create(): View
     {
-        $categories = Category::orderBy('name')->get();
+        $categories = Kategori::orderBy('nama')->get();
 
         return view('admin.posts.create', compact('categories'));
     }
@@ -42,13 +42,13 @@ class PostController extends Controller
         }
 
         Post::create([
-            'title' => $data['title'],
-            'slug' => $this->generateUniqueSlug($data['title']),
-            'excerpt' => $data['excerpt'],
-            'content' => $data['content'],
-            'category_id' => $data['category_id'],
+            'judul' => $data['judul'],
+            'slug' => $this->generateUniqueSlug($data['judul']),
+            'ringkasan' => $data['ringkasan'],
+            'konten' => $data['konten'],
+            'Kategori_id' => $data['Kategori_id'],
             'user_id' => $userId,
-            'image_path' => null,
+            'gambar' => null,
         ]);
 
         return redirect()->route('admin.posts.index')->with('success', 'Berita berhasil ditambahkan.');
@@ -56,7 +56,7 @@ class PostController extends Controller
 
     public function edit(Post $post): View
     {
-        $categories = Category::orderBy('name')->get();
+        $categories = Kategori::orderBy('nama')->get();
 
         return view('admin.posts.edit', compact('post', 'categories'));
     }
@@ -67,16 +67,16 @@ class PostController extends Controller
         unset($data['image']);
 
         $slug = $post->slug;
-        if ($post->title !== $data['title'] || empty($slug)) {
-            $slug = $this->generateUniqueSlug($data['title'], $post->id);
+        if ($post->judul !== $data['judul'] || empty($slug)) {
+            $slug = $this->generateUniqueSlug($data['judul'], $post->id);
         }
 
         $post->update([
-            'title' => $data['title'],
+            'judul' => $data['judul'],
             'slug' => $slug,
-            'excerpt' => $data['excerpt'],
-            'content' => $data['content'],
-            'category_id' => $data['category_id'],
+            'ringkasan' => $data['ringkasan'],
+            'konten' => $data['konten'],
+            'Kategori_id' => $data['Kategori_id'],
         ]);
 
         return redirect()->route('admin.posts.index')->with('success', 'Berita berhasil diperbarui.');
@@ -93,9 +93,9 @@ class PostController extends Controller
         }
     }
 
-    private function generateUniqueSlug(string $title, ?int $ignoreId = null): string
+    private function generateUniqueSlug(string $judul, ?int $ignoreId = null): string
     {
-        $baseSlug = Str::slug($title);
+        $baseSlug = Str::slug($judul);
         if ($baseSlug === '') {
             $baseSlug = 'post';
         }
