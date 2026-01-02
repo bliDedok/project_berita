@@ -7,22 +7,28 @@ use Illuminate\Foundation\Http\FormRequest;
 class StorePostRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Izinkan request ini dijalankan
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Aturan validasi saat TAMBAH BERITA
      */
     public function rules(): array
     {
         return [
-            //
+            'judul'       => 'required|string|min:5|max:200',
+            'ringkasan'   => 'required|string|min:10',
+            'konten'      => 'required|string|min:50',
+            'kategori_id' => 'required|exists:categories,id',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 }
+
+
+
+
