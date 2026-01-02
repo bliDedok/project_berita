@@ -8369,5 +8369,9 @@
         "php": "^8.2"
     },
     "platform-dev": {},
+<<<<<<< HEAD
     "plugin-api-version": "2.6.0"
+=======
+    "plugin-api-version": "2.9.0"
+>>>>>>> 9f7e6fe (membuat ui atau tampilan untuk website)
 }
