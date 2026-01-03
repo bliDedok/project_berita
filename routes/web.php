@@ -3,17 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\KategoriController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index']);
+
+Route::get('/berita/{post:slug}', [HomeController::class, 'show'])->name('berita.show');
 
 Route::prefix('admin')
-    
-    ->group(function () {
-        Route::resource('posts', AdminPostController::class)->names('admin.posts');
-    });
-
-Route::prefix('admin')->group(function () {
-    Route::resource('kategori', KategoriController::class)->names('admin.kategori');
+  ->middleware(['auth', 'can:access-admin'])
+  ->group(function () {
+      Route::resource('posts', AdminPostController::class)->names('admin.posts');
+      Route::resource('kategori', KategoriController::class)->names('admin.kategori');
 });

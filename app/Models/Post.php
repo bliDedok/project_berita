@@ -17,7 +17,8 @@ class Post extends Model
         'konten',
         'kategori_id',
         'user_id',
-        'image',
+        'gambar',
+        'jumlah_pembaca',
     ];
 
     public function kategori(): BelongsTo
