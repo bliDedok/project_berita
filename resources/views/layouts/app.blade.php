@@ -14,26 +14,26 @@
 <body class="bg-light">
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom mb-3">
     <div class="container">
-        {{-- Arahkan ke halaman berita --}}
         <a class="navbar-brand" href="{{ url('/home') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
 
         <div class="d-flex align-items-center gap-2">
-            {{-- Admin menu: hanya admin --}}
             @can('access-admin')
                 <a class="btn btn-outline-primary btn-sm" href="{{ route('admin.posts.index') }}">
                     Admin Posts
                 </a>
             @endcan
 
-            {{-- Auth buttons --}}
             @auth
                 <span class="small text-muted d-none d-sm-inline">
                     {{ auth()->user()->name }}
                 </span>
 
-                {{-- Link logout tapi tetap POST --}}
+                <a class="btn btn-outline-secondary btn-sm" href="{{ route('profile.index') }}">
+                 Profile
+                </a>
+
                 <a href="#" class="btn btn-outline-secondary btn-sm"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Logout
@@ -54,8 +54,6 @@
     @yield('content')
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXx5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

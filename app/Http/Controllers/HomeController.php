@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use App\Models\Post;
+use App\Services\CuacaService;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    public function index(Request $request): View
+    public function index(Request $request, CuacaService $cuacaService): View
     {
+        // ====== Filter berita (punya kamu) ======
         $query = Post::with('kategori')
             ->orderByDesc('tanggal_unggah');
 
@@ -28,7 +29,30 @@ class HomeController extends Controller
         $posts = $query->paginate(6)->withQueryString();
         $kategoris = Kategori::orderBy('nama')->get();
 
-        return view('home', compact('posts', 'kategoris'));
+        // ====== Daftar bacaan (punya kamu) ======
+        $savedIds = auth()->check()
+            ? auth()->user()->daftarBacaan()->pluck('posts.id')->toArray()
+            : [];
+
+        // ====== CUACA ======
+        $cities = config('services.cuaca.cities', ['Denpasar']);
+        $selectedCity = $request->get('city', config('services.cuaca.default_city', 'Denpasar'));
+
+        // kalau user iseng kirim city di luar list, fallback ke default
+        if (!in_array($selectedCity, $cities)) {
+            $selectedCity = config('services.cuaca.default_city', 'Denpasar');
+        }
+
+        $cuaca = $cuacaService->get($selectedCity);
+
+        return view('home', compact(
+            'posts',
+            'kategoris',
+            'savedIds',
+            'cuaca',
+            'cities',
+            'selectedCity'
+        ));
     }
 
     public function show(Post $post): View

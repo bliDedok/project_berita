@@ -2,6 +2,43 @@
 
 @section('content')
 <div class="container">
+
+    <div class="card mb-3">
+        <div class="card-body d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between">
+            <div>
+                <div class="fw-semibold">Cuaca Bali</div>
+                @if($cuaca)
+                    <div class="text-muted small">
+                        {{ $cuaca['kota'] }}{{ $cuaca['provinsi'] ? ', '.$cuaca['provinsi'] : '' }}
+                        • {{ $cuaca['status'] }}
+                        • Suhu {{ $cuaca['suhu'] }}°C (terasa {{ $cuaca['terasa'] }}°C)
+                        • Kelembapan {{ $cuaca['lembap'] }}%
+                        • Angin {{ $cuaca['angin'] }} km/j
+                        • Max {{ $cuaca['max'] }}° / Min {{ $cuaca['min'] }}°
+                        • Peluang hujan {{ $cuaca['hujan'] }}%
+                    </div>
+                @else
+                    <div class="text-danger small">Gagal ambil data cuaca.</div>
+                @endif
+            </div>
+
+            {{-- Dropdown pilih kota --}}
+            <form method="GET" action="{{ url('/home') }}" class="d-flex gap-2 align-items-center">
+                {{-- keep query berita --}}
+                <input type="hidden" name="q" value="{{ request('q') }}">
+                <input type="hidden" name="kategori" value="{{ request('kategori') }}">
+
+                <select name="city" class="form-select form-select-sm" style="min-width: 180px">
+                    @foreach($cities as $city)
+                        <option value="{{ $city }}" @selected($selectedCity === $city)>{{ $city }}</option>
+                    @endforeach
+                </select>
+
+                <button class="btn btn-sm btn-outline-primary" type="submit">Update</button>
+            </form>
+        </div>
+    </div>
+
     <div class="d-flex flex-column flex-md-row gap-3 align-items-md-center justify-content-between mb-3">
         <h4 class="m-0">Berita Terbaru</h4>
 
@@ -49,11 +86,34 @@
                             </p>
                         </div>
 
-                        <div class="card-footer bg-white border-0 d-flex justify-content-between">
+                        <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center">
                             <small class="text-muted">👁 {{ $post->jumlah_pembaca }}</small>
-                            <a href="{{ route('berita.show', $post->slug) }}" class="btn btn-sm btn-outline-primary">
-                                Baca
-                            </a>
+
+                            <div class="d-flex gap-2">
+                                @auth
+                                    @php $isSaved = in_array($post->id, $savedIds ?? []); @endphp
+
+                                    <form method="POST" action="{{ route('daftar-bacaan.toggle', $post) }}">
+                                        @csrf
+                                        <button type="submit"
+                                            class="btn btn-sm {{ $isSaved ? 'btn-success' : 'btn-outline-success' }}">
+                                            {{ $isSaved ? 'Tersimpan' : 'Simpan' }}
+                                        </button>
+                                    </form>
+                                @else
+                                    {{-- Guest: arahkan ke login dulu --}}
+                                    <a
+                                        href="{{ route('login') }}?redirect={{ urlencode(url()->current()) }}"
+                                        class="btn btn-sm btn-outline-success"
+                                    >
+                                        Simpan
+                                    </a>
+                                @endauth
+
+                                <a href="{{ route('berita.show', $post->slug) }}" class="btn btn-sm btn-outline-primary">
+                                    Baca
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

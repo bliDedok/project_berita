@@ -35,4 +35,28 @@ return [
         ],
     ],
 
+    'cuaca' => [
+    'default_city' => env('WEATHER_DEFAULT_CITY', 'Denpasar'),
+    'country_code' => env('WEATHER_COUNTRY_CODE', 'ID'),
+    'timezone'     => env('WEATHER_TIMEZONE', 'Asia/Makassar'),
+    'ttl'          => env('WEATHER_TTL', 900),
+
+    'cities' => [
+        'Denpasar',
+        'Kuta',
+        'Ubud',
+        'Sanur',
+        'Nusa Dua',
+        'Canggu',
+        'Jimbaran',
+        'Tabanan',
+        'Gianyar',
+        'Singaraja',
+        'Bangli',
+        'Karangasem',
+        'Klungkung',
+        'Negara',
+        ],
+    ],
+
 ];

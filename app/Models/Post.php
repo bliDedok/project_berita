@@ -30,4 +30,10 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function disimpanOleh()
+    {
+    return $this->belongsToMany(User::class, 'daftar_bacaan')
+        ->withTimestamps();
+    }
 }
