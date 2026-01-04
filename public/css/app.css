@@ -1,0 +1,28 @@
+/* Minimal overrides for Bootstrap layout used in templates */
+body {
+  background-color: #f8f9fa;
+}
+.navbar-brand {
+  letter-spacing: .4px;
+}
+.card {
+  border-radius: 12px;
+}
+.navbar .btn-toggle {
+  width: 100%;
+  text-align: left;
+  color: #333;
+  background: transparent;
+  border: none;
+}
+.img-fluid.d-none {
+  display: none !important;
+}
+article pre {
+  white-space: pre-wrap;
+  background: #222;
+  color: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  overflow: auto;
+}

@@ -3,7 +3,6 @@
 @section('content')
 <div class="container py-4">
 
-    {{-- Header + Tombol Tambah --}}
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
             <h1 class="h3 mb-1">Manajemen Kategori</h1>
@@ -14,7 +13,6 @@
         </a>
     </div>
 
-    {{-- Table --}}
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
@@ -62,7 +60,6 @@
                 </table>
             </div>
 
-            {{-- Pagination --}}
             <div class="mt-3">
                 {{ $kategoris->links() }}
             </div>

@@ -22,9 +22,7 @@
                 @endif
             </div>
 
-            {{-- Dropdown pilih kota --}}
             <form method="GET" action="{{ url('/home') }}" class="d-flex gap-2 align-items-center">
-                {{-- keep query berita --}}
                 <input type="hidden" name="q" value="{{ request('q') }}">
                 <input type="hidden" name="kategori" value="{{ request('kategori') }}">
 
@@ -101,7 +99,6 @@
                                         </button>
                                     </form>
                                 @else
-                                    {{-- Guest: arahkan ke login dulu --}}
                                     <a
                                         href="{{ route('login') }}?redirect={{ urlencode(url()->current()) }}"
                                         class="btn btn-sm btn-outline-success"
@@ -126,3 +123,5 @@
     @endif
 </div>
 @endsection
+
+
