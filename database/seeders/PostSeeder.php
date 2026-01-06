@@ -12,6 +12,8 @@ class PostSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $this->call([
+        AdminUserSeeder::class,
+        ]);
     }
 }

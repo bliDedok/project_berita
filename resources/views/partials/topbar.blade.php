@@ -51,7 +51,7 @@
                     </button>
                 </form>
             @else
-                <a class="btn btn-sm btn-light fw-semibold" href="{{ route('login') }}">
+                <a class="btn btn-sm btn-dark fw-semibold" href="{{ route('login') }}">
                     <i class="bi bi-box-arrow-in-right me-1"></i> Login
                 </a>
             @endauth

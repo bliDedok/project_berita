@@ -36,9 +36,9 @@ class HomeController extends Controller
 
         // ====== CUACA ======
         $cities = config('services.cuaca.cities', ['Denpasar']);
-        $selectedCity = $request->get('city', config('services.cuaca.default_city', 'Denpasar'));
+        $selectedCity = $request->get('kota', config('services.cuaca.default_city', 'Denpasar'));
 
-        // kalau user iseng kirim city di luar list, fallback ke default
+       
         if (!in_array($selectedCity, $cities)) {
             $selectedCity = config('services.cuaca.default_city', 'Denpasar');
         }
@@ -55,9 +55,30 @@ class HomeController extends Controller
         ));
     }
 
-    public function show(Post $post): View
-    {
-        $post->increment('jumlah_pembaca');
-        return view('berita.show', compact('post'));
+    public function show(Post $post)
+{
+    $currentUrl  = url()->current();
+    $waLink      = 'https://wa.me/?text=' . rawurlencode($post->judul . "\n\n" . $currentUrl);
+
+    $publishDate = $post->tanggal_unggah ?? $post->created_at;
+    $updatedDate = $post->updated_at;
+
+    $isSaved = false;
+
+    if (auth()->check()) {
+        $isSaved = auth()->user()
+            ->daftarBacaan()
+            ->where('posts.id', $post->id)
+            ->exists();
     }
+
+    return view('berita.show', compact(
+        'post',
+        'currentUrl',
+        'waLink',
+        'publishDate',
+        'updatedDate',
+        'isSaved'
+    ));
+}
 }

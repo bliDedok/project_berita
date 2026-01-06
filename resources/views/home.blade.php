@@ -28,9 +28,8 @@
 
         <form method="GET" action="{{ url('/home') }}" class="d-flex gap-2 align-items-center">
             <input type="hidden" name="q" value="{{ request('q') }}">
-            <input type="hidden" name="kategori" value="{{ request('kategori') }}">
 
-            <select name="city" class="form-select form-select-sm" style="min-width: 220px">
+            <select name="kota" class="form-select form-select-sm" style="min-width: 220px">
                 @foreach($cities as $city)
                     <option value="{{ $city }}" @selected($selectedCity === $city)>{{ $city }}</option>
                 @endforeach
