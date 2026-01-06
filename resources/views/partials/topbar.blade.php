@@ -12,7 +12,7 @@
 
         <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="{{ url('/home') }}">
             <i class="bi bi-newspaper"></i>
-            <span>News</span>
+            <span>GatraBali</span>
         </a>
 
         {{-- Search (desktop) --}}

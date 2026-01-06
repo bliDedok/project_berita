@@ -43,7 +43,6 @@ return [
 
     'cities' => [
         'Denpasar',
-        'Kuta',
         'Ubud',
         'Sanur',
         'Nusa Dua',

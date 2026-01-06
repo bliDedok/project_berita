@@ -6,12 +6,15 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DaftarBacaanController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::prefix('admin')
   ->middleware(['auth', 'can:access-admin'])
   ->group(function () {
       Route::resource('posts', AdminPostController::class)->names('admin.posts');
       Route::resource('kategori', KategoriController::class)->names('admin.kategori');
+      Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
+      Route::delete('users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
 Route::get('/', [HomeController::class, 'index'])->name('home');

@@ -108,6 +108,11 @@
                href="{{ route('admin.kategori.index') }}">
                 <i class="bi bi-tags me-2"></i> Kategori
             </a>
+            
+            <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
+                href="{{ route('admin.users.index') }}">
+                <i class="bi bi-people me-2"></i> Users
+            </a>
 
             <hr class="my-3">
 
