@@ -7,6 +7,13 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DaftarBacaanController;
 
+Route::prefix('admin')
+  ->middleware(['auth', 'can:access-admin'])
+  ->group(function () {
+      Route::resource('posts', AdminPostController::class)->names('admin.posts');
+      Route::resource('kategori', KategoriController::class)->names('admin.kategori');
+});
+
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index']);
 
@@ -26,9 +33,3 @@ Route::middleware('auth')->group(function () {
         ->name('daftar-bacaan.destroy');
 });
 
-Route::prefix('admin')
-  ->middleware(['auth', 'can:access-admin'])
-  ->group(function () {
-      Route::resource('posts', AdminPostController::class)->names('admin.posts');
-      Route::resource('kategori', KategoriController::class)->names('admin.kategori');
-});

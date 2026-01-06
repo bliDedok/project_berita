@@ -13,12 +13,15 @@ use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
 use Laravel\Fortify\Contracts\UpdatesUserPasswords;
 use Laravel\Fortify\Contracts\ResetsUserPasswords;
 
+use Laravel\Fortify\Contracts\RegisterResponse;
+
 use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\ResetUserPassword;
 
 use Laravel\Fortify\Actions\RedirectIfTwoFactorAuthenticatable;
+use App\Http\Responses\RegisterResponse as CustomRegisterResponse;
 
 
 class FortifyServiceProvider extends ServiceProvider
@@ -29,6 +32,7 @@ class FortifyServiceProvider extends ServiceProvider
     public function register(): void
 {
     $this->app->singleton(CreatesNewUsers::class, CreateNewUser::class);
+    $this->app->singleton(RegisterResponse::class, CustomRegisterResponse::class);
     $this->app->singleton(UpdatesUserProfileInformation::class, UpdateUserProfileInformation::class);
     $this->app->singleton(UpdatesUserPasswords::class, UpdateUserPassword::class);
     $this->app->singleton(ResetsUserPasswords::class, ResetUserPassword::class);
@@ -41,7 +45,6 @@ class FortifyServiceProvider extends ServiceProvider
     {
     Fortify::loginView(fn () => view('auth.login'));
     Fortify::registerView(fn () => view('auth.register'));
-    Fortify::requestPasswordResetLinkView(fn () => view('auth.forgot-password'));
     Fortify::resetPasswordView(fn (Request $request) => view('auth.reset-password', ['request' => $request]));
 
         RateLimiter::for('login', function (Request $request) {

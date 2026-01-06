@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index(Request $request, CuacaService $cuacaService): View
     {
-        // ====== Filter berita (punya kamu) ======
+        
         $query = Post::with('kategori')
             ->orderByDesc('tanggal_unggah');
 

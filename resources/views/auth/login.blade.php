@@ -32,16 +32,10 @@
       <input type="password" name="password" class="form-control" required>
     </div>
 
-    <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox" name="remember" id="remember">
-      <label class="form-check-label" for="remember">Remember me</label>
-    </div>
-
     <button class="btn btn-primary w-100" type="submit">Masuk</button>
 
     <div class="d-flex justify-content-between mt-3">
       <a href="{{ url('/register') }}">Register</a>
-      <a href="{{ url('/forgot-password') }}">Lupa password?</a>
     </div>
   </form>
 </div>
