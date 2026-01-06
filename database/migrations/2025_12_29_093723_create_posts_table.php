@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('ringkasan');
             $table->string('konten');
-            $table->string('image');
+            $table->string('gambar');
             $table->foreignId('kategori_id');
             $table->foreignId('user_id');
             $table->timestamp('tanggal_unggah');
